@@ -1,9 +1,9 @@
-import express from 'express';
-import pkgEnv from 'dotenv';
-const { DotenvConfigOptions } = pkgEnv;
-const app = express();
 import pkg from 'body-parser';
 const { urlencoded } = pkg;
+
+import express from 'express';
+const app = express();
+
 const port = +process.env.PORT || 5000;
 
 console.log(port);
