@@ -1,7 +1,15 @@
 extends layouts/main-layout.pug 
 
+block script
+    script(src="./src/main.js") 
+
+
 block content
     h1 Users 
     ul 
-        each user in users 
-            li #{user.name}
+        if users.length > 0
+            each user in users 
+                li #{user.name}
+                button(onclick='handleDelete(event)') Delete
+        else 
+            h1 No Users

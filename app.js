@@ -1,13 +1,21 @@
 import pkg from 'body-parser';
 const { urlencoded } = pkg;
 
+import url from 'url';
+
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
+
 import express from 'express';
 const app = express();
 
 const port = +process.env.PORT || 5000;
 
-console.log(port);
-const users = [];
+let users = [];
 
 app.set('view engine', 'pug');
 app.set('views', 'views');
@@ -24,6 +32,17 @@ app.get('/users', (req, res) => {
 
 app.post('/add-user', (req, res) => {
     users.push({name: req.body.username});
+    res.redirect('/users');
+});
+
+app.get('/src/:subPath', (req, res) => {
+    const { subPath } = req.params;
+    res.sendFile(`src/${subPath}`, { root: __dirname });
+});
+
+app.use('/users/delete/:value', (req, res)=>{
+    const value = req.params.value;
+    users = users.filter((item)=>{item.name!==value});
     res.redirect('/users');
 });
 
