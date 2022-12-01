@@ -1,8 +1,6 @@
 import pkg from 'body-parser';
 const { urlencoded } = pkg;
 
-import url from 'url';
-
 import path from 'path';
 import { fileURLToPath } from 'url';
 
